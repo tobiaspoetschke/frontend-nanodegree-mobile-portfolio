@@ -501,10 +501,18 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  // optimised for rendering performance through avoiding layout thrashing( one loop to calculate, one to set styles)
+  // https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing
   var items = document.querySelectorAll('.mover');
+  var newValues = [];
+  var constantPhaseValue = Math.sin((document.body.scrollTop / 1250));
+
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = constantPhaseValue + (i % 5);
+    newValues[i] = items[i].basicLeft + 100 * phase + 'px';
+  }
+  for (var j = 0; j < items.length; j++) {
+      items[j].style.left = newValues[j];
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
