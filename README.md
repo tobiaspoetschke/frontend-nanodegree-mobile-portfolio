@@ -53,3 +53,7 @@ The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstra
 
 * <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
 * <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+
+### Note to done optimisations
+
+I tried to capture what I have done through small descriptive commits and don't think it should be repeated in this README.
