@@ -450,15 +450,11 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
       var pizzaContainer = document.querySelectorAll(".randomPizzaContainer");
       var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-      var newSizes = [];
-
-      for (var i = 0; i < pizzaContainer.length; i++) {
-          var dx = determineDx(pizzaContainer[i], size, windowWidth);
-          newSizes[i] = (pizzaContainer[i].offsetWidth + dx) + 'px';
-      }
+      var dx = determineDx(pizzaContainer[0], size, windowWidth);
+      var newSize = (pizzaContainer[0].offsetWidth + dx) + 'px';
 
       for (var j = 0; j < pizzaContainer.length; j++) {
-          pizzaContainer[j].style.width = newSizes[j];
+          pizzaContainer[j].style.width = newSize;
       }
   }
 
@@ -511,10 +507,10 @@ function updatePositions() {
   // https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing
   var items = document.querySelectorAll('.mover');
   var newValues = [];
-  var constantPhaseValue = Math.sin((document.body.scrollTop / 1250));
+  var constantPhaseValue = document.body.scrollTop / 1250;
 
   for (var i = 0; i < items.length; i++) {
-    var phase = constantPhaseValue + (i % 5);
+    var phase = Math.sin(constantPhaseValue + (i % 5));
     newValues[i] = items[i].basicLeft + 100 * phase + 'px';
   }
   for (var j = 0; j < items.length; j++) {
@@ -538,7 +534,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  var numberOfPizzas = (screen.height / s) * cols;
+  for (var i = 0; i < numberOfPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
