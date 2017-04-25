@@ -54,6 +54,18 @@ The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstra
 * <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
 * <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
 
-### Note to done optimisations
+### How to run app
 
-I tried to capture what I have done through small descriptive commits and don't think it should be repeated in this README.
+Just open index.html.
+
+### Optimisations made
+
+- moved render blocking JavaScript to end of body
+- marked CSS for print with media="print"
+- reduced size of images
+- compressed images
+- inlined font-loading
+- inlined CSS file(styles.css)
+- optimised rendering performance through avoiding layout thrashing
+- got some one-time-calculations out of loops
+- reduced number of moving pizzas, to what can actually be displayed on screen
